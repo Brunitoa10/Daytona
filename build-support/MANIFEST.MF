@@ -1,0 +1,3 @@
+Main-Class: com.daytona.app.Main
+Class-Path: lib/sqlite-jdbc.jar lib/postgresql.jar lib/slf4j-api.jar lib/slf4j-nop.jar
+Enable-Native-Access: ALL-UNNAMED

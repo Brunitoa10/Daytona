@@ -1,0 +1,7 @@
+out/
+target/
+portable/
+dist/data/
+data/
+*.db
+config.properties
