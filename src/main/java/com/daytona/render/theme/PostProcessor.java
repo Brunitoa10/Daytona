@@ -6,8 +6,8 @@ import java.awt.Graphics2D;
 public interface PostProcessor {
 
     /** Valor de {@link java.awt.RenderingHints#KEY_INTERPOLATION} para el escalado. */
-    Object interpolation();
+    public Object interpolation();
 
     /** Efecto dibujado sobre la imagen ya escalada (x, y, w, h = área ocupada en la ventana). */
-    void overlay(Graphics2D screen, int x, int y, int w, int h, int sourceHeight);
+    public void overlay(Graphics2D screen, int x, int y, int w, int h, int sourceHeight);
 }

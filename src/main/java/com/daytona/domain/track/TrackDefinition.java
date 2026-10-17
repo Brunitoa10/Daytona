@@ -6,10 +6,10 @@ package com.daytona.domain.track;
  */
 public interface TrackDefinition {
 
-    TrackInfo info();
+    public TrackInfo info();
 
-    TrackTheme theme();
+    public TrackTheme theme();
 
     /** Describe el trazado en el builder (el builder ya sabe si es espejo). */
-    void layout(TrackBuilder b);
+    public void layout(TrackBuilder b);
 }

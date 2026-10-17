@@ -7,11 +7,11 @@ import java.util.List;
 /** Vista de solo lectura de la carrera para los conductores (Interface Segregation). */
 public interface RaceContext {
 
-    Track track();
+    public Track track();
 
-    List<Racer> racers();
+    public List<Racer> racers();
 
-    Racer player();
+    public Racer player();
 
-    double elapsed();
+    public double elapsed();
 }

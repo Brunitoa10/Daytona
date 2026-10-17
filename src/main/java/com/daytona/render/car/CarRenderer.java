@@ -17,5 +17,5 @@ public interface CarRenderer {
      * @param bounds  se completa con el rectángulo ocupado en pantalla
      * @return true si se dibujó
      */
-    boolean draw(Graphics2D g, RoadFrame frame, int segment, double percent, CarSprite car, Rectangle bounds);
+    public boolean draw(Graphics2D g, RoadFrame frame, int segment, double percent, CarSprite car, Rectangle bounds);
 }

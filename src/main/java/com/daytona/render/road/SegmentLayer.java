@@ -11,8 +11,8 @@ import java.awt.Graphics2D;
 public interface SegmentLayer {
 
     /** Preparación antes de recorrer los segmentos (opcional). */
-    default void begin(RoadFrame frame) {
+    public default void begin(RoadFrame frame) {
     }
 
-    void paint(Graphics2D g, RoadFrame frame, int segment);
+    public void paint(Graphics2D g, RoadFrame frame, int segment);
 }

@@ -4,15 +4,15 @@ package com.daytona.app;
 public interface DisplayControl {
 
     /** Aplica resolución interna y pantalla completa desde las opciones. */
-    void applyVideoSettings();
+    public void applyVideoSettings();
 
-    void toggleFullscreen();
+    public void toggleFullscreen();
 
-    void requestQuit();
+    public void requestQuit();
 
-    int width();
+    public int width();
 
-    int height();
+    public int height();
 
-    double fps();
+    public double fps();
 }

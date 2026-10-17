@@ -3,12 +3,12 @@ package com.daytona.domain.car;
 /** Patrón Strategy: caja automática o manual. */
 public interface Transmission {
 
-    TransmissionType type();
+    public TransmissionType type();
 
     /** 0 = punto muerto, 1..gearCount. */
-    int gear();
+    public int gear();
 
-    int gearCount();
+    public int gearCount();
 
     /**
      * Decide cambios para este paso.
@@ -16,7 +16,7 @@ public interface Transmission {
      * @param rpm régimen normalizado 0..1+ en la marcha actual
      * @return true si cambió de marcha
      */
-    boolean update(DriveCommand cmd, double rpm, double speedRatio, double dt);
+    public boolean update(DriveCommand cmd, double rpm, double speedRatio, double dt);
 
-    void reset();
+    public void reset();
 }

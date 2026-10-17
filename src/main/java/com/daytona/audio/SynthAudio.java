@@ -49,7 +49,7 @@ public final class SynthAudio implements AudioService, Runnable {
 
     private interface Voice {
         /** @return muestra o NaN si terminó */
-        double next();
+        public double next();
     }
 
     private SynthAudio(SourceDataLine line) {

@@ -18,19 +18,19 @@ public final class MenuList {
 
     /** Opción de menú (patrón Command: cada ítem encapsula su acción). */
     public interface Item {
-        String label();
+        public String label();
 
-        default String value() {
+        public default String value() {
             return null;
         }
 
-        default void confirm() {
+        public default void confirm() {
         }
 
-        default void adjust(int direction) {
+        public default void adjust(int direction) {
         }
 
-        default boolean enabled() {
+        public default boolean enabled() {
             return true;
         }
     }

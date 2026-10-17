@@ -18,7 +18,7 @@ public final class CollisionSystem {
 
     /** Recibe los choques que involucran al jugador. */
     public interface Listener {
-        void onPlayerCollision(double intensity);
+        public void onPlayerCollision(double intensity);
     }
 
     public void resolve(Track track, List<Racer> racers, Listener listener) {

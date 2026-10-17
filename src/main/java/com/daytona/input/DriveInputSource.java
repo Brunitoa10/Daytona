@@ -6,13 +6,13 @@ import com.daytona.domain.car.DriveCommand;
 public interface DriveInputSource {
 
     /** Lee el comando de manejo de este paso. */
-    DriveCommand read(double dt);
+    public DriveCommand read(double dt);
 
     /** Flanco del botón de cambiar cámara. */
-    boolean viewPressed();
+    public boolean viewPressed();
 
     /** Flanco del botón de pausa del dispositivo de manejo. */
-    boolean pausePressed();
+    public boolean pausePressed();
 
-    String describe();
+    public String describe();
 }

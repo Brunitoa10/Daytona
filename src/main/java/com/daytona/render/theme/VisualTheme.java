@@ -11,9 +11,9 @@ import com.daytona.render.hud.HudSkin;
  */
 public interface VisualTheme {
 
-    CarRenderer createCarRenderer(SpriteAtlas atlas);
+    public CarRenderer createCarRenderer(SpriteAtlas atlas);
 
-    HudSkin createHudSkin(Settings settings);
+    public HudSkin createHudSkin(Settings settings);
 
-    PostProcessor postProcessor();
+    public PostProcessor postProcessor();
 }

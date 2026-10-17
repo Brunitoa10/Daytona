@@ -29,7 +29,7 @@ public final class JoystickBackends {
     }
 
     private interface Factory {
-        JoystickBackend create() throws Throwable;
+        public JoystickBackend create() throws Throwable;
     }
 
     private static void tryAdd(List<JoystickBackend> list, String name, Factory f) {

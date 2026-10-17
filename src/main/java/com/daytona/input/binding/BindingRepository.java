@@ -5,9 +5,9 @@ import java.util.Optional;
 /** Persistencia de perfiles de control por dispositivo. */
 public interface BindingRepository {
 
-    Optional<BindingProfile> find(String deviceKey);
+    public Optional<BindingProfile> find(String deviceKey);
 
-    void save(BindingProfile profile);
+    public void save(BindingProfile profile);
 
-    void delete(String deviceKey);
+    public void delete(String deviceKey);
 }

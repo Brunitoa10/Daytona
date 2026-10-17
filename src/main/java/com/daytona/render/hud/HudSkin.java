@@ -15,5 +15,5 @@ public interface HudSkin {
      * @param s     escala de interfaz (alto / 540)
      * @param clock segundos acumulados (para parpadeos)
      */
-    void drawPanels(Graphics2D g, int w, int h, double s, Race race, Racer player, double clock);
+    public void drawPanels(Graphics2D g, int w, int h, double s, Race race, Racer player, double clock);
 }
