@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class TrackCatalogTest {
+public class TrackCatalogTest {
 
     private final TrackCatalog catalog = new TrackCatalog();
 
     @Test
-    void allTracksBuildWithValidData() {
+    public void allTracksBuildWithValidData() {
         assertEquals(4, catalog.size());
         for (TrackInfo info : catalog.all()) {
             Track t = catalog.get(info.id(), false);
@@ -29,7 +29,7 @@ class TrackCatalogTest {
     }
 
     @Test
-    void mirrorFlipsCurves() {
+    public void mirrorFlipsCurves() {
         Track normal = catalog.get("canyon", false);
         Track mirror = catalog.get("canyon", true);
         for (int i = 0; i < normal.segmentCount(); i++) {

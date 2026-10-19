@@ -65,16 +65,16 @@ public final class MeshCarRenderer implements CarRenderer {
         int visible = 0;
         for (int fi = 0; fi < faceCount; fi++) {
             CarMesh.Face face = faces.get(fi);
-            double nx = face.nx * cos + face.nz * sin;
-            double nz = (-face.nx * sin + face.nz * cos) / Z_SCALE;
-            double ny = face.ny / Y_SCALE;
+            double nx = face.nx() * cos + face.nz() * sin;
+            double nz = (-face.nx() * sin + face.nz() * cos) / Z_SCALE;
+            double ny = face.ny() / Y_SCALE;
             double nl = Math.sqrt(nx * nx + ny * ny + nz * nz);
             nx /= nl;
             ny /= nl;
             nz /= nl;
-            double fcz = (-face.cx * sin + face.cz * cos) * Z_SCALE;
-            double fcx = face.cx * cos + face.cz * sin;
-            if (!f.projectPoint(relZ + fcz, lateral + fcx, face.cy * Y_SCALE, tmp)) {
+            double fcz = (-face.cx() * sin + face.cz() * cos) * Z_SCALE;
+            double fcx = face.cx() * cos + face.cz() * sin;
+            if (!f.projectPoint(relZ + fcz, lateral + fcx, face.cy() * Y_SCALE, tmp)) {
                 return false; // demasiado cerca o fuera del rango: no se dibuja este frame
             }
             // vector cámara -> cara reconstruido desde la proyección
@@ -87,9 +87,9 @@ public final class MeshCarRenderer implements CarRenderer {
             }
             int n = face.size();
             for (int k = 0; k < n; k++) {
-                double rx = face.x[k] * cos + face.z[k] * sin;
-                double rz = (-face.x[k] * sin + face.z[k] * cos) * Z_SCALE;
-                if (!f.projectPoint(relZ + rz, lateral + rx, face.y[k] * Y_SCALE, tmp)) {
+                double rx = face.x(k) * cos + face.z(k) * sin;
+                double rz = (-face.x(k) * sin + face.z(k) * cos) * Z_SCALE;
+                if (!f.projectPoint(relZ + rz, lateral + rx, face.y(k) * Y_SCALE, tmp)) {
                     return false;
                 }
                 int ix = (int) Math.round(tmp[0]);
@@ -101,7 +101,7 @@ public final class MeshCarRenderer implements CarRenderer {
                 minY = Math.min(minY, iy);
                 maxY = Math.max(maxY, iy);
             }
-            depth[fi] = vz - face.layer * 4;
+            depth[fi] = vz - face.layer() * 4;
             light[fi] = 0.42 + 0.58 * Math.max(0, nx * LX + ny * LY + nz * LZ);
             order[visible++] = fi;
         }
@@ -124,7 +124,7 @@ public final class MeshCarRenderer implements CarRenderer {
         for (int k = 0; k < visible; k++) {
             int fi = order[k];
             CarMesh.Face face = faces.get(fi);
-            g.setColor(pal.get(shade(face.material, car, light[fi]), level));
+            g.setColor(pal.get(shade(face.material(), car, light[fi]), level));
             g.fillPolygon(sx[fi], sy[fi], face.size());
             if (fi == mesh.plateFace() || fi == mesh.roofFace()) {
                 drawNumber(g, fi, car, face.size());

@@ -147,7 +147,7 @@ public final class CarArt {
         g.setComposite(AlphaComposite.SrcOver);
     }
 
-    static Color shade(Color c, double f) {
+    private static Color shade(Color c, double f) {
         return new Color(clamp(c.getRed() * f), clamp(c.getGreen() * f), clamp(c.getBlue() * f));
     }
 

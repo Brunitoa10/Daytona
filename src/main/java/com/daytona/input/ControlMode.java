@@ -8,7 +8,7 @@ public enum ControlMode {
 
     private final String label;
 
-    ControlMode(String label) {
+    private ControlMode(String label) {
         this.label = label;
     }
 

@@ -16,7 +16,7 @@ public final class Segment {
     private final List<TrackSprite> sprites = new ArrayList<>(2);
     private final List<TrackSprite> readOnly = Collections.unmodifiableList(sprites);
 
-    Segment(int index, double curve, double y1, double y2, boolean tunnel, boolean walls) {
+    public Segment(int index, double curve, double y1, double y2, boolean tunnel, boolean walls) {
         this.index = index;
         this.curve = curve;
         this.y1 = y1;
@@ -25,7 +25,7 @@ public final class Segment {
         this.walls = walls;
     }
 
-    void addSprite(TrackSprite s) {
+    public void addSprite(TrackSprite s) {
         sprites.add(s);
     }
 

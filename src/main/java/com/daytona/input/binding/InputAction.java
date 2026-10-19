@@ -19,7 +19,7 @@ public enum InputAction {
     private final String prompt;
     private final boolean axis;
 
-    InputAction(String prompt, boolean axis) {
+    private InputAction(String prompt, boolean axis) {
         this.prompt = prompt;
         this.axis = axis;
     }

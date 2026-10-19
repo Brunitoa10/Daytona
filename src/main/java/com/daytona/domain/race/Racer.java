@@ -14,11 +14,11 @@ public final class Racer {
     private final boolean player;
     private Driver driver;
 
-    int lap = -1;            // -1 = todavía detrás de la línea de largada
-    double lapStart;
-    double finishTime = -1;
-    int position;
-    final List<Double> lapTimes = new ArrayList<>();
+    private int lap = -1;            // -1 = todavía detrás de la línea de largada
+    private double lapStart;
+    private double finishTime = -1;
+    private int position;
+    private final List<Double> lapTimes = new ArrayList<>();
 
     public Racer(String name, Car car, Driver driver, boolean player) {
         this.name = name;
@@ -38,8 +38,28 @@ public final class Racer {
     public double finishTime() { return finishTime; }
     public List<Double> lapTimes() { return Collections.unmodifiableList(lapTimes); }
 
-    void setDriver(Driver d) {
+    public void setDriver(Driver d) {
         this.driver = d;
+    }
+
+    public void incrementLap() {
+        lap++;
+    }
+
+    public void setLapStart(double t) {
+        this.lapStart = t;
+    }
+
+    public void addLapTime(double t) {
+        lapTimes.add(t);
+    }
+
+    public void setFinishTime(double t) {
+        this.finishTime = t;
+    }
+
+    public void setPosition(int p) {
+        this.position = p;
     }
 
     /** Distancia total recorrida, usada para calcular posiciones. */

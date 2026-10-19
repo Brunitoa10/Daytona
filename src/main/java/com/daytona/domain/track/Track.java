@@ -12,7 +12,7 @@ public final class Track {
     private final boolean mirror;
     private final float[][] minimap;
 
-    Track(TrackInfo info, List<Segment> segments, TrackTheme theme, int[] checkpoints, boolean mirror, float[][] minimap) {
+    public Track(TrackInfo info, List<Segment> segments, TrackTheme theme, int[] checkpoints, boolean mirror, float[][] minimap) {
         this.info = info;
         this.segments = segments.toArray(new Segment[0]);
         this.theme = theme;

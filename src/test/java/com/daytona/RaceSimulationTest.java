@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /** Simula carreras completas para validar IA, vueltas, checkpoints y tiempos del arcade. */
-class RaceSimulationTest {
+public class RaceSimulationTest {
 
     private static final double DT = 1.0 / 120;
     private final TrackCatalog tracks = new TrackCatalog();
@@ -44,7 +44,7 @@ class RaceSimulationTest {
     }
 
     @Test
-    void aiFinishesEveryTrack() {
+    public void aiFinishesEveryTrack() {
         for (TrackInfo info : tracks.all()) {
             Race race = run(tracks.get(info.id(), false), GameModeType.CHAMPIONSHIP, 2, 7, null, new EventBus());
             List<RaceResult> results = race.results();
@@ -57,7 +57,7 @@ class RaceSimulationTest {
     }
 
     @Test
-    void arcadeTimeIsEnoughForAGoodDriver() {
+    public void arcadeTimeIsEnoughForAGoodDriver() {
         for (TrackInfo info : tracks.all()) {
             EventBus bus = new EventBus();
             AtomicInteger checkpoints = new AtomicInteger();

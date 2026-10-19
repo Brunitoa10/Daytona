@@ -11,7 +11,7 @@ public enum SqlDialect {
     private final String autoIdPk;
     private final String blobType;
 
-    SqlDialect(String autoIdPk, String blobType) {
+    private SqlDialect(String autoIdPk, String blobType) {
         this.autoIdPk = autoIdPk;
         this.blobType = blobType;
     }

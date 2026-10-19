@@ -12,7 +12,7 @@ public enum Resolution {
     private final int width;
     private final int height;
 
-    Resolution(String label, int width, int height) {
+    private Resolution(String label, int width, int height) {
         this.label = label;
         this.width = width;
         this.height = height;

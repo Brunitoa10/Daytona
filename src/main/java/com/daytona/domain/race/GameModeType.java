@@ -18,7 +18,7 @@ public enum GameModeType {
     private final String description;
     private final Supplier<GameMode> factory;
 
-    GameModeType(String label, String description, Supplier<GameMode> factory) {
+    private GameModeType(String label, String description, Supplier<GameMode> factory) {
         this.label = label;
         this.description = description;
         this.factory = factory;

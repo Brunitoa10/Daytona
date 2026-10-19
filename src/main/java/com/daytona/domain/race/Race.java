@@ -172,8 +172,8 @@ public final class Race implements RaceContext {
     }
 
     private void onLineCrossed(Racer r) {
-        r.lap++;
-        if (r.lap == 0) {
+        r.incrementLap();
+        if (r.lap() == 0) {
             if (r == player) {
                 ghostRecorder.startLap();
             }
@@ -182,24 +182,24 @@ public final class Race implements RaceContext {
         if (r.finished()) {
             return;
         }
-        double lapTime = elapsed - r.lapStart;
-        r.lapTimes.add(lapTime);
-        r.lapStart = elapsed;
+        double lapTime = elapsed - r.lapStart();
+        r.addLapTime(lapTime);
+        r.setLapStart(elapsed);
         boolean best = bestLapOverall < 0 || lapTime < bestLapOverall;
         if (best) {
             bestLapOverall = lapTime;
         }
-        boolean finishedNow = r.lap >= setup.laps();
+        boolean finishedNow = r.lap() >= setup.laps();
         if (finishedNow) {
-            r.finishTime = elapsed;
+            r.setFinishTime(elapsed);
         }
         if (r != player) {
             return;
         }
         ghostRecorder.lapCompleted(lapTime, track.length());
         playerSection = 0;
-        bus.publish(new GameEvent.LapCompleted(r.isPlayer(), r.lap, lapTime, lapTime <= r.bestLap(),
-                r.lap == setup.laps() - 1));
+        bus.publish(new GameEvent.LapCompleted(r.isPlayer(), r.lap(), lapTime, lapTime <= r.bestLap(),
+                r.lap() == setup.laps() - 1));
         if (finishedNow) {
             if (phase == Phase.RACING) {
                 phase = Phase.FINISHED;

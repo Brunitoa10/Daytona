@@ -34,7 +34,7 @@ public final class TrackBuilder {
         private final double offset;
         private final int variant;
 
-        PendingSprite(int index, SpriteKind kind, double offset, int variant) {
+        private PendingSprite(int index, SpriteKind kind, double offset, int variant) {
             this.index = index;
             this.kind = kind;
             this.offset = offset;

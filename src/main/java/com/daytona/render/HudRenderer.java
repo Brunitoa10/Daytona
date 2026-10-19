@@ -20,13 +20,13 @@ import java.util.List;
 public final class HudRenderer implements AutoCloseable {
 
     private static final class Message {
-        final String text;
-        final Color color;
-        final double duration;
-        final boolean big;
-        double time;
+        private final String text;
+        private final Color color;
+        private final double duration;
+        private final boolean big;
+        private double time;
 
-        Message(String text, Color color, double duration, boolean big) {
+        private Message(String text, Color color, double duration, boolean big) {
             this.text = text;
             this.color = color;
             this.duration = duration;

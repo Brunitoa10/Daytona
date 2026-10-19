@@ -19,12 +19,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class PersistenceTest {
+public class PersistenceTest {
 
     private final Database db = Database.open(AppConfig.load());
 
     @Test
-    void settingsRoundTrip() {
+    public void settingsRoundTrip() {
         JdbcSettingsRepository repo = new JdbcSettingsRepository(db);
         repo.save("test.key", "uno");
         repo.save("test.key", "dos");
@@ -32,7 +32,7 @@ class PersistenceTest {
     }
 
     @Test
-    void recordsAreOrderedAndLapOnlyImproves() {
+    public void recordsAreOrderedAndLapOnlyImproves() {
         JdbcRecordRepository repo = new JdbcRecordRepository(db);
         String track = "t" + System.nanoTime();
         repo.saveResult(new RaceResultEntry(track, false, "ARCADE", "falcon", "AT", "BBB", 2, 90_000, 30_000, 1));
@@ -45,7 +45,7 @@ class PersistenceTest {
     }
 
     @Test
-    void bindingProfileRoundTrip() {
+    public void bindingProfileRoundTrip() {
         JdbcBindingRepository repo = new JdbcBindingRepository(db);
         Map<InputAction, Binding> m = new EnumMap<>(InputAction.class);
         m.put(InputAction.STEER, Binding.axis(0, 0.01f, 0.98f));

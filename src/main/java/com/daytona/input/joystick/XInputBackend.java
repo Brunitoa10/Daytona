@@ -9,7 +9,7 @@ import java.util.List;
  * Ejes: 0 LX, 1 LY (abajo +), 2 RX, 3 RY, 4 gatillo izq (0..1), 5 gatillo der (0..1).
  * Botones: bits de wButtons, ver {@link XInputLayout}.
  */
-final class XInputBackend implements JoystickBackend {
+public final class XInputBackend implements JoystickBackend {
 
     private static final int DPAD_UP = 0;
     private static final int DPAD_DOWN = 1;
@@ -18,7 +18,7 @@ final class XInputBackend implements JoystickBackend {
 
     private final int[] state = new int[7];
 
-    XInputBackend() {
+    public XInputBackend() {
         if (!NativeInput.load() || NativeInput.xinputVersion() == 0) {
             throw new IllegalStateException("XInput no disponible");
         }
@@ -48,20 +48,20 @@ final class XInputBackend implements JoystickBackend {
             return false;
         }
         int buttons = state[0] & 0xFFFF;
-        out.axes[0] = stick(state[3]);
-        out.axes[1] = -stick(state[4]);
-        out.axes[2] = stick(state[5]);
-        out.axes[3] = -stick(state[6]);
-        out.axes[4] = state[1] / 255f;
-        out.axes[5] = state[2] / 255f;
+        out.set(0, stick(state[3]));
+        out.set(1, -stick(state[4]));
+        out.set(2, stick(state[5]));
+        out.set(3, -stick(state[6]));
+        out.set(4, state[1] / 255f);
+        out.set(5, state[2] / 255f);
         for (int b = 0; b < 16; b++) {
-            out.buttons[b] = (buttons & (1 << b)) != 0;
+            out.press(b, (buttons & (1 << b)) != 0);
         }
-        out.buttons[JoystickSnapshot.HAT_UP] = out.buttons[DPAD_UP];
-        out.buttons[JoystickSnapshot.HAT_DOWN] = out.buttons[DPAD_DOWN];
-        out.buttons[JoystickSnapshot.HAT_LEFT] = out.buttons[DPAD_LEFT];
-        out.buttons[JoystickSnapshot.HAT_RIGHT] = out.buttons[DPAD_RIGHT];
-        out.connected = true;
+        out.press(JoystickSnapshot.HAT_UP, out.button(DPAD_UP));
+        out.press(JoystickSnapshot.HAT_DOWN, out.button(DPAD_DOWN));
+        out.press(JoystickSnapshot.HAT_LEFT, out.button(DPAD_LEFT));
+        out.press(JoystickSnapshot.HAT_RIGHT, out.button(DPAD_RIGHT));
+        out.setConnected(true);
         return true;
     }
 

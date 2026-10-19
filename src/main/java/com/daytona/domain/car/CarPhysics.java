@@ -58,7 +58,7 @@ public final class CarPhysics {
         public int hashCode() {
             return java.util.Objects.hash(gearChanged, startedScraping, scrapeIntensity);
         }
-        static final StepResult NONE = new StepResult(false, false, 0);
+        private static final StepResult NONE = new StepResult(false, false, 0);
     }
 
     /**
@@ -68,31 +68,31 @@ public final class CarPhysics {
      */
     public StepResult update(Car car, DriveCommand cmd, Track track, double dt, boolean moving) {
         CarSpec spec = car.spec();
-        double top = spec.topSpeed() * (car.slipstream ? 1.05 : 1.0);
+        double top = spec.topSpeed() * (car.slipstream() ? 1.05 : 1.0);
         Transmission tx = car.transmission();
-        car.throttle = cmd.throttle();
-        car.braking = cmd.brake() > 0.1;
+        car.setThrottle(cmd.throttle());
+        car.setBraking(cmd.brake() > 0.1);
 
-        if (car.crashTimer > 0) {
-            car.crashTimer -= dt;
+        if (car.crashTimer() > 0) {
+            car.setCrashTimer(car.crashTimer() - dt);
             cmd = new DriveCommand(cmd.steer() * 0.3, 0, 0.4, false, false, cmd.heldGear(), -1);
         }
 
         double gearTop = gearTopSpeed(spec, tx.gear());
-        double rpmInGear = tx.gear() == 0 ? 0 : car.speed / gearTop;
-        boolean shifted = tx.update(cmd, rpmInGear, car.speed / top, dt);
+        double rpmInGear = tx.gear() == 0 ? 0 : car.speed() / gearTop;
+        boolean shifted = tx.update(cmd, rpmInGear, car.speed() / top, dt);
         gearTop = gearTopSpeed(spec, tx.gear());
 
         if (!moving) {
-            car.rpm = approach(car.rpm, 0.15 + 0.85 * cmd.throttle(), dt * 3);
+            car.setRpm(approach(car.rpm(), 0.15 + 0.85 * cmd.throttle(), dt * 3));
             return new StepResult(shifted, false, 0);
         }
 
         // ---- longitudinal ----
         double accel = 0;
         if (tx.gear() > 0) {
-            double r = car.speed / gearTop;
-            car.rpm = Math.max(0.12, Math.min(1.05, r));
+            double r = car.speed() / gearTop;
+            car.setRpm(Math.max(0.12, Math.min(1.05, r)));
             if (r < 1.0) {
                 accel = cmd.throttle() * baseAccel(spec) * torque(r) * gearMultiplier(tx.gear(), tx.gearCount());
             }
@@ -101,70 +101,70 @@ public final class CarPhysics {
             }
             accel -= (1 - cmd.throttle()) * spec.topSpeed() * 0.04; // freno motor
         } else {
-            car.rpm = approach(car.rpm, 0.12 + 0.9 * cmd.throttle(), dt * 4);
+            car.setRpm(approach(car.rpm(), 0.12 + 0.9 * cmd.throttle(), dt * 4));
         }
-        if (car.slipstream) {
+        if (car.slipstream()) {
             accel *= 1.08;
         }
-        double ratio = car.speed / spec.topSpeed();
+        double ratio = car.speed() / spec.topSpeed();
         double drag = spec.topSpeed() * (0.02 + 0.066 * ratio * ratio);
         double brake = cmd.brake() * spec.topSpeed() * 0.55 * spec.braking();
-        car.speed += (accel - drag - brake) * dt;
+        car.setSpeed(car.speed() + (accel - drag - brake) * dt);
 
-        Segment seg = track.segmentAt(car.z);
+        Segment seg = track.segmentAt(car.z());
         double limit = seg.walls() ? WALL_LIMIT : FREE_LIMIT;
-        car.offRoad = Math.abs(car.x) > 1.0 && !seg.walls();
-        if (car.offRoad && car.speed > spec.topSpeed() * OFFROAD_LIMIT) {
-            car.speed -= spec.topSpeed() * 0.9 * dt;
+        car.setOffRoad(Math.abs(car.x()) > 1.0 && !seg.walls());
+        if (car.offRoad() && car.speed() > spec.topSpeed() * OFFROAD_LIMIT) {
+            car.setSpeed(car.speed() - spec.topSpeed() * 0.9 * dt);
         }
-        if (car.drifting) {
-            car.speed -= spec.topSpeed() * 0.07 * dt;
+        if (car.drifting()) {
+            car.setSpeed(car.speed() - spec.topSpeed() * 0.07 * dt);
         }
-        car.speed = Math.max(0, Math.min(car.speed, top * 1.02));
+        car.setSpeed(Math.max(0, Math.min(car.speed(), top * 1.02)));
 
         // ---- lateral ----
-        double sp = car.speed / spec.topSpeed();
+        double sp = car.speed() / spec.topSpeed();
         updateDrift(car, cmd, sp, dt);
         double dx = dt * 2.0 * sp;
-        double authority = spec.handling() * (car.drifting ? 1.35 : 1.0);
-        car.x += cmd.steer() * dx * authority;
-        car.x -= dx * sp * seg.curve() * CENTRIFUGAL / spec.grip() * (car.drifting ? 0.72 : 1.0);
+        double authority = spec.handling() * (car.drifting() ? 1.35 : 1.0);
+        car.setX(car.x() + cmd.steer() * dx * authority);
+        car.setX(car.x() - dx * sp * seg.curve() * CENTRIFUGAL / spec.grip() * (car.drifting() ? 0.72 : 1.0));
 
-        boolean wasScraping = car.scraping;
-        car.scraping = false;
+        boolean wasScraping = car.scraping();
+        car.setScraping(false);
         double intensity = 0;
-        if (Math.abs(car.x) > limit) {
-            car.x = Math.copySign(limit, car.x);
+        if (Math.abs(car.x()) > limit) {
+            car.setX(Math.copySign(limit, car.x()));
             if (seg.walls()) {
-                car.scraping = true;
-                car.speed -= spec.topSpeed() * 0.28 * dt;
+                car.setScraping(true);
+                car.setSpeed(car.speed() - spec.topSpeed() * 0.28 * dt);
                 intensity = sp;
             }
         }
 
-        car.steerVisual = approach(car.steerVisual, cmd.steer(), dt * 6);
-        car.driftAngle = approach(car.driftAngle, car.drifting ? Math.signum(cmd.steer()) : 0, dt * 4);
+        car.setSteerVisual(approach(car.steerVisual(), cmd.steer(), dt * 6));
+        car.setDriftAngle(approach(car.driftAngle(), car.drifting() ? Math.signum(cmd.steer()) : 0, dt * 4));
 
         // ---- avance ----
-        car.z = track.wrap(car.z + car.speed * dt);
-        return shifted || (car.scraping && !wasScraping)
-                ? new StepResult(shifted, car.scraping && !wasScraping, intensity)
+        car.setZ(track.wrap(car.z() + car.speed() * dt));
+        return shifted || (car.scraping() && !wasScraping)
+                ? new StepResult(shifted, car.scraping() && !wasScraping, intensity)
                 : StepResult.NONE;
     }
 
     /** Derrape: golpe de freno + volantazo a alta velocidad; se mantiene mientras se dobla. */
     private static void updateDrift(Car car, DriveCommand cmd, double sp, double dt) {
         if (cmd.brake() > 0.3) {
-            car.brakeTapTimer = 0.4;
+            car.setBrakeTapTimer(0.4);
         } else {
-            car.brakeTapTimer = Math.max(0, car.brakeTapTimer - dt);
+            car.setBrakeTapTimer(Math.max(0, car.brakeTapTimer() - dt));
         }
-        if (!car.drifting) {
-            if (Math.abs(cmd.steer()) > 0.6 && sp > 0.5 && car.brakeTapTimer > 0 && cmd.brake() < 0.3 && cmd.throttle() > 0.4) {
-                car.drifting = true;
+        if (!car.drifting()) {
+            if (Math.abs(cmd.steer()) > 0.6 && sp > 0.5 && car.brakeTapTimer() > 0 && cmd.brake() < 0.3 && cmd.throttle() > 0.4) {
+                car.setDrifting(true);
             }
-        } else if (Math.abs(cmd.steer()) < 0.3 || sp < 0.35 || car.offRoad) {
-            car.drifting = false;
+        } else if (Math.abs(cmd.steer()) < 0.3 || sp < 0.35 || car.offRoad()) {
+            car.setDrifting(false);
         }
     }
 
@@ -179,7 +179,7 @@ public final class CarPhysics {
     }
 
     /** Curva de torque: baja en bajo régimen, máxima a ~75 %, cae al corte. */
-    static double torque(double r) {
+    private static double torque(double r) {
         if (r < 0.25) {
             return 0.55 + r * 1.2;
         }

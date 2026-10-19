@@ -22,7 +22,7 @@ public final class BackgroundRenderer {
         private final int h;
         private final int layer;
 
-        Key(TrackTheme theme, int w, int h, int layer) {
+        private Key(TrackTheme theme, int w, int h, int layer) {
             this.theme = theme;
             this.w = w;
             this.h = h;

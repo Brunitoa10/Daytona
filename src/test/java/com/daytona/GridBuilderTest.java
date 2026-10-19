@@ -16,10 +16,10 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class GridBuilderTest {
+public class GridBuilderTest {
 
     @Test
-    void fortyCarGridHasUniqueNamesAndOnePlayer() {
+    public void fortyCarGridHasUniqueNamesAndOnePlayer() {
         CarCatalog cars = new CarCatalog();
         RaceSetup setup = new RaceSetup(new TrackCatalog().get("sunrise", false), cars.byId("falcon"),
                 TransmissionType.AUTOMATIC, GameModeType.ARCADE.create(), 3, 39, Difficulty.NORMAL, "YOU",

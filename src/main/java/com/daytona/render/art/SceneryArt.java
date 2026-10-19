@@ -400,15 +400,15 @@ public final class SceneryArt {
     }
 
     /** Utilidades de tono sin depender del paquete render. */
-    static final class FogShades {
+    private static final class FogShades {
         private FogShades() {
         }
 
-        static int darker(int rgb) {
+        private static int darker(int rgb) {
             return scale(rgb, 0.62);
         }
 
-        static int lighter(int rgb) {
+        private static int lighter(int rgb) {
             return scale(rgb, 1.25);
         }
 

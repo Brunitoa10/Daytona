@@ -21,7 +21,7 @@ public final class Standings {
     public void update() {
         order.sort(comparator);
         for (int i = 0; i < order.size(); i++) {
-            order.get(i).position = i + 1;
+            order.get(i).setPosition(i + 1);
         }
     }
 

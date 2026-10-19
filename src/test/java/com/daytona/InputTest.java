@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class InputTest {
+public class InputTest {
 
     @Test
-    void invertedPedalIsNormalized() {
+    public void invertedPedalIsNormalized() {
         JoystickSnapshot s = new JoystickSnapshot();
         Binding pedal = Binding.axis(1, 1f, -1f); // reposo +1, a fondo -1
         s.set(1, 1f);
@@ -25,7 +25,7 @@ class InputTest {
     }
 
     @Test
-    void wizardDetectsAxisAndButton() {
+    public void wizardDetectsAxisAndButton() {
         BindingWizard w = new BindingWizard("dev", false);
         JoystickSnapshot s = new JoystickSnapshot();
         double dt = 1.0 / 120;
@@ -61,7 +61,7 @@ class InputTest {
     }
 
     @Test
-    void ghostSerialization() {
+    public void ghostSerialization() {
         GhostData g = new GhostData(new float[]{0, 1, 2}, new float[]{0, 100, 300}, new float[]{0, 0.5f, -0.5f}, 2.0, "falcon");
         GhostData back = GhostData.fromBytes(g.toBytes()).get();
         double[] out = new double[2];

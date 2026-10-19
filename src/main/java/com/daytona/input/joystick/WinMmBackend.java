@@ -9,7 +9,7 @@ import java.util.Map;
  * Joysticks DirectInput vía WinMM (joyGetPosEx): volantes, pedales, palancas H,
  * joysticks y gamepads genéricos. Hasta 6 ejes, 32 botones y un POV. Windows 7+.
  */
-final class WinMmBackend implements JoystickBackend {
+public final class WinMmBackend implements JoystickBackend {
 
     private static final int MAX_DEVICES = 16;
     private static final int AXES = 6;
@@ -20,7 +20,7 @@ final class WinMmBackend implements JoystickBackend {
     private final int[] pos = new int[8];
     private final Map<Integer, int[]> ranges = new HashMap<>();
 
-    WinMmBackend() {
+    public WinMmBackend() {
         if (!NativeInput.load()) {
             throw new IllegalStateException("DLL de entrada no disponible");
         }
@@ -76,15 +76,15 @@ final class WinMmBackend implements JoystickBackend {
                 min = 0;
                 max = 65535;
             }
-            out.axes[a] = (float) (((v - min) / (max - min)) * 2 - 1);
+            out.set(a, (float) (((v - min) / (max - min)) * 2 - 1));
         }
         int buttons = pos[6];
         for (int b = 0; b < 32; b++) {
-            out.buttons[b] = (buttons & (1 << b)) != 0;
+            out.press(b, (buttons & (1 << b)) != 0);
         }
         int pov = pos[7] & 0xFFFF;
         out.setHat(pov == POV_CENTERED ? -1 : pov / 100.0);
-        out.connected = true;
+        out.setConnected(true);
         return true;
     }
 }

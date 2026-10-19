@@ -12,7 +12,7 @@ public enum ViewMode {
     private final double distanceFactor;
     private final boolean showPlayerCar;
 
-    ViewMode(String label, double height, double distanceFactor, boolean showPlayerCar) {
+    private ViewMode(String label, double height, double distanceFactor, boolean showPlayerCar) {
         this.label = label;
         this.height = height;
         this.distanceFactor = distanceFactor;

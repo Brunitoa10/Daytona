@@ -8,7 +8,7 @@ public enum VisualStyle {
 
     private final String label;
 
-    VisualStyle(String label) {
+    private VisualStyle(String label) {
         this.label = label;
     }
 

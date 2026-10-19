@@ -152,7 +152,7 @@ public final class Arcade94HudSkin implements HudSkin {
     }
 
     /** 1'23"45 */
-    static String arcadeTime(double seconds) {
+    private static String arcadeTime(double seconds) {
         if (seconds < 0) {
             return "-'--\"--";
         }

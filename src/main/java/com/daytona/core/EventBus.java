@@ -15,7 +15,7 @@ public final class EventBus {
         private final Class<T> type;
         private final Consumer<? super T> handler;
 
-        Subscription(Class<T> type, Consumer<? super T> handler) {
+        private Subscription(Class<T> type, Consumer<? super T> handler) {
             this.type = type;
             this.handler = handler;
         }
@@ -44,7 +44,7 @@ public final class EventBus {
         public int hashCode() {
             return java.util.Objects.hash(type, handler);
         }
-        void deliver(GameEvent event) {
+        private void deliver(GameEvent event) {
             if (type.isInstance(event)) {
                 handler.accept(type.cast(event));
             }

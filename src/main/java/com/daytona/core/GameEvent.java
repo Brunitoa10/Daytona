@@ -5,7 +5,7 @@ package com.daytona.core;
  */
 public interface GameEvent {
 
-    static final class CountdownTick implements GameEvent {
+    public static final class CountdownTick implements GameEvent {
         private final int value;
 
         public CountdownTick(int value) {
@@ -34,7 +34,7 @@ public interface GameEvent {
         }
     }
 
-    static final class RaceStarted implements GameEvent {
+    public static final class RaceStarted implements GameEvent {
         private final boolean perfectStart;
 
         public RaceStarted(boolean perfectStart) {
@@ -63,7 +63,7 @@ public interface GameEvent {
         }
     }
 
-    static final class LapCompleted implements GameEvent {
+    public static final class LapCompleted implements GameEvent {
         private final boolean player;
         private final int lap;
         private final double lapTime;
@@ -116,7 +116,7 @@ public interface GameEvent {
         }
     }
 
-    static final class CheckpointPassed implements GameEvent {
+    public static final class CheckpointPassed implements GameEvent {
         private final double bonusSeconds;
 
         public CheckpointPassed(double bonusSeconds) {
@@ -145,7 +145,7 @@ public interface GameEvent {
         }
     }
 
-    static final class Collision implements GameEvent {
+    public static final class Collision implements GameEvent {
         private final boolean player;
         private final double intensity;
 
@@ -180,7 +180,7 @@ public interface GameEvent {
         }
     }
 
-    static final class WallScrape implements GameEvent {
+    public static final class WallScrape implements GameEvent {
         private final boolean player;
         private final double intensity;
 
@@ -215,7 +215,7 @@ public interface GameEvent {
         }
     }
 
-    static final class GearChanged implements GameEvent {
+    public static final class GearChanged implements GameEvent {
         private final int gear;
 
         public GearChanged(int gear) {
@@ -244,13 +244,13 @@ public interface GameEvent {
         }
     }
 
-    static final class TimeOver implements GameEvent {
+    public static final class TimeOver implements GameEvent {
 
         public TimeOver() {
         }
     }
 
-    static final class RaceFinished implements GameEvent {
+    public static final class RaceFinished implements GameEvent {
         private final int playerPosition;
 
         public RaceFinished(int playerPosition) {

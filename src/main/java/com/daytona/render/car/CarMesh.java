@@ -16,20 +16,32 @@ public final class CarMesh {
 
     /** Cara plana del modelo. */
     public static final class Face {
-        final double[] x;
-        final double[] y;
-        final double[] z;
-        final Material material;
-        final boolean decal;
-        final int layer;
-        final double nx;
-        final double ny;
-        final double nz;
-        final double cx;
-        final double cy;
-        final double cz;
+        private final double[] x;
+        private final double[] y;
+        private final double[] z;
+        private final Material material;
+        private final boolean decal;
+        private final int layer;
+        private final double nx;
+        private final double ny;
+        private final double nz;
+        private final double cx;
+        private final double cy;
+        private final double cz;
 
-        Face(double[] pts, Material material, int layer, double centerY) {
+        public double x(int k) { return x[k]; }
+        public double y(int k) { return y[k]; }
+        public double z(int k) { return z[k]; }
+        public Material material() { return material; }
+        public int layer() { return layer; }
+        public double nx() { return nx; }
+        public double ny() { return ny; }
+        public double nz() { return nz; }
+        public double cx() { return cx; }
+        public double cy() { return cy; }
+        public double cz() { return cz; }
+
+        private Face(double[] pts, Material material, int layer, double centerY) {
             int n = pts.length / 3;
             x = new double[n];
             y = new double[n];
@@ -175,20 +187,20 @@ public final class CarMesh {
     }
 
     private static final class Builder {
-        final List<Face> faces = new ArrayList<>();
+        private final List<Face> faces = new ArrayList<>();
 
-        int face(Material m, double... pts) {
+        private int face(Material m, double... pts) {
             faces.add(new Face(pts, m, 0, CENTER_Y));
             return faces.size() - 1;
         }
 
-        int decal(Material m, double... pts) {
+        private int decal(Material m, double... pts) {
             faces.add(new Face(pts, m, 1, CENTER_Y));
             return faces.size() - 1;
         }
 
         /** Calco que va encima de otro calco. */
-        int decal2(Material m, double... pts) {
+        private int decal2(Material m, double... pts) {
             faces.add(new Face(pts, m, 2, CENTER_Y));
             return faces.size() - 1;
         }

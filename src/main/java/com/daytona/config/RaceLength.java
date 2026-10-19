@@ -9,7 +9,7 @@ public enum RaceLength {
     private final String label;
     private final double factor;
 
-    RaceLength(String label, double factor) {
+    private RaceLength(String label, double factor) {
         this.label = label;
         this.factor = factor;
     }

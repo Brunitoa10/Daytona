@@ -20,7 +20,7 @@ public final class MinimapRenderer {
         private final Track track;
         private final int size;
 
-        Key(Track track, int size) {
+        private Key(Track track, int size) {
             this.track = track;
             this.size = size;
         }

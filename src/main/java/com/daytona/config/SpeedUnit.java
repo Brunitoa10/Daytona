@@ -7,7 +7,7 @@ public enum SpeedUnit {
     private final String label;
     private final double fromKmh;
 
-    SpeedUnit(String label, double fromKmh) {
+    private SpeedUnit(String label, double fromKmh) {
         this.label = label;
         this.fromKmh = fromKmh;
     }

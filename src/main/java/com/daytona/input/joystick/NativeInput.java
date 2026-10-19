@@ -13,7 +13,7 @@ import java.nio.file.StandardCopyOption;
  * Puente JNI a {@code daytona_input_x86/x64.dll} (WinMM + XInput). La DLL viaja dentro
  * del .jar y se extrae a una carpeta temporal; funciona en Windows 7, 8, 10 y 11 con Java 8+.
  */
-final class NativeInput {
+public final class NativeInput {
 
     private static final Log LOG = Log.of("input");
     private static Boolean loaded;
@@ -22,7 +22,7 @@ final class NativeInput {
     }
 
     /** Carga la DLL una sola vez. Devuelve false si no se pudo (el juego sigue con teclado). */
-    static synchronized boolean load() {
+    public static synchronized boolean load() {
         if (loaded != null) {
             return loaded;
         }
@@ -67,14 +67,14 @@ final class NativeInput {
     }
 
     /** 0 = XInput no disponible; 14, 13 o 910 según la DLL encontrada. */
-    static native int xinputVersion();
+    public static native int xinputVersion();
 
     /** out: botones, gatillo izq, gatillo der, LX, LY, RX, RY. Devuelve 0 si está conectado. */
-    static native int xinputState(int index, int[] out);
+    public static native int xinputState(int index, int[] out);
 
     /** caps: vid, pid, botones, ejes y 6 pares min/max (X, Y, Z, R, U, V). Devuelve 0 si existe. */
-    static native int joyCaps(int id, int[] caps, char[] name);
+    public static native int joyCaps(int id, int[] caps, char[] name);
 
     /** out: X, Y, Z, R, U, V, botones (bits), POV (centésimas de grado, 65535 = centrado). 0 = OK. */
-    static native int joyPos(int id, int[] out);
+    public static native int joyPos(int id, int[] out);
 }

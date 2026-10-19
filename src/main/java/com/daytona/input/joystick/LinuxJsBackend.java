@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /** Linux: lee /dev/input/jsN (API joystick del kernel) con Java puro. */
-final class LinuxJsBackend implements JoystickBackend {
+public final class LinuxJsBackend implements JoystickBackend {
 
     private static final int JS_EVENT_BUTTON = 0x01;
     private static final int JS_EVENT_AXIS = 0x02;
@@ -21,11 +21,11 @@ final class LinuxJsBackend implements JoystickBackend {
     private final Map<Integer, Reader> readers = new ConcurrentHashMap<>();
 
     private static final class Reader implements Runnable {
-        final JoystickSnapshot state = new JoystickSnapshot();
-        final Path path;
-        volatile boolean alive = true;
+        private final JoystickSnapshot state = new JoystickSnapshot();
+        private final Path path;
+        private volatile boolean alive = true;
 
-        Reader(Path path) {
+        private Reader(Path path) {
             this.path = path;
         }
 
@@ -43,11 +43,11 @@ final class LinuxJsBackend implements JoystickBackend {
                     int number = ev[7] & 0xFF;
                     synchronized (state) {
                         if (type == JS_EVENT_AXIS && number < JoystickSnapshot.MAX_AXES) {
-                            state.axes[number] = Math.max(-1f, value / 32767f);
+                            state.set(number, Math.max(-1f, value / 32767f));
                         } else if (type == JS_EVENT_BUTTON && number < 32) {
-                            state.buttons[number] = value != 0;
+                            state.press(number, value != 0);
                         }
-                        state.connected = true;
+                        state.setConnected(true);
                     }
                 }
             } catch (IOException ignored) {
@@ -55,7 +55,7 @@ final class LinuxJsBackend implements JoystickBackend {
             }
             alive = false;
             synchronized (state) {
-                state.connected = false;
+                state.setConnected(false);
             }
         }
     }

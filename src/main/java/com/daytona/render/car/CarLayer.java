@@ -17,10 +17,10 @@ import java.util.List;
 public final class CarLayer implements SegmentLayer {
 
     private static final class Placed {
-        final CarSprite car;
-        final double percent;
+        private final CarSprite car;
+        private final double percent;
 
-        Placed(CarSprite car, double percent) {
+        private Placed(CarSprite car, double percent) {
             this.car = car;
             this.percent = percent;
         }

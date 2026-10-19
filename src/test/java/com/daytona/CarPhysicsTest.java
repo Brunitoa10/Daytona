@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class CarPhysicsTest {
+public class CarPhysicsTest {
 
     private static final double DT = 1.0 / 120;
     private final Track oval = new TrackCatalog().get("sunrise", false);
@@ -29,7 +29,7 @@ class CarPhysicsTest {
     }
 
     @Test
-    void automaticReachesNearTopSpeedAndShifts() {
+    public void automaticReachesNearTopSpeedAndShifts() {
         Car c = car(TransmissionType.AUTOMATIC);
         double timeTo200 = -1;
         for (int i = 0; i < 120 * 20; i++) {
@@ -46,7 +46,7 @@ class CarPhysicsTest {
     }
 
     @Test
-    void manualNeutralDoesNotMove() {
+    public void manualNeutralDoesNotMove() {
         Car c = car(TransmissionType.MANUAL);
         for (int i = 0; i < 240; i++) {
             physics.update(c, new DriveCommand(0, 1, 0, false, false, 0, -1), oval, DT, true);
@@ -56,7 +56,7 @@ class CarPhysicsTest {
     }
 
     @Test
-    void offRoadSlowsDown() {
+    public void offRoadSlowsDown() {
         Track canyon = new TrackCatalog().get("canyon", false);
         Car c = car(TransmissionType.AUTOMATIC);
         c.place(0, 2.0);

@@ -7,7 +7,7 @@ public enum TransmissionType {
     private final String label;
     private final String shortLabel;
 
-    TransmissionType(String label, String shortLabel) {
+    private TransmissionType(String label, String shortLabel) {
         this.label = label;
         this.shortLabel = shortLabel;
     }

@@ -11,7 +11,7 @@ public enum Difficulty {
     private final double aiSkill;
     private final double timeFactor;
 
-    Difficulty(String label, double aiSkill, double timeFactor) {
+    private Difficulty(String label, double aiSkill, double timeFactor) {
         this.label = label;
         this.aiSkill = aiSkill;
         this.timeFactor = timeFactor;

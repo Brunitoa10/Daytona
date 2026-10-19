@@ -26,7 +26,7 @@ public enum SpriteKind {
     private final double worldWidth;
     private final boolean collidable;
 
-    SpriteKind(double worldWidth, boolean collidable) {
+    private SpriteKind(double worldWidth, boolean collidable) {
         this.worldWidth = worldWidth;
         this.collidable = collidable;
     }

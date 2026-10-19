@@ -9,22 +9,22 @@ public final class Car {
     private final CarSpec spec;
     private final Transmission transmission;
 
-    double z;
-    double x;
-    double speed;
-    double prevZ;
-    double prevX;
-    double rpm;
-    double steerVisual;
-    double driftAngle;
-    boolean drifting;
-    boolean braking;
-    boolean offRoad;
-    boolean scraping;
-    boolean slipstream;
-    double brakeTapTimer;
-    double crashTimer;
-    double throttle;
+    private double z;
+    private double x;
+    private double speed;
+    private double prevZ;
+    private double prevX;
+    private double rpm;
+    private double steerVisual;
+    private double driftAngle;
+    private boolean drifting;
+    private boolean braking;
+    private boolean offRoad;
+    private boolean scraping;
+    private boolean slipstream;
+    private double brakeTapTimer;
+    private double crashTimer;
+    private double throttle;
 
     public Car(CarSpec spec, Transmission transmission) {
         this.spec = spec;
@@ -64,6 +64,8 @@ public final class Car {
     public boolean slipstream() { return slipstream; }
     public boolean crashed() { return crashTimer > 0; }
     public double throttle() { return throttle; }
+    public double brakeTapTimer() { return brakeTapTimer; }
+    public double crashTimer() { return crashTimer; }
     public int gear() { return transmission.gear(); }
 
     public double speedRatio() {
@@ -75,6 +77,18 @@ public final class Car {
     public void setZ(double z) { this.z = z; }
     public void setSpeed(double s) { this.speed = Math.max(0, s); }
     public void setSlipstream(boolean s) { this.slipstream = s; }
+
+    // Mutadores usados por CarPhysics
+    public void setRpm(double rpm) { this.rpm = rpm; }
+    public void setSteerVisual(double v) { this.steerVisual = v; }
+    public void setDriftAngle(double a) { this.driftAngle = a; }
+    public void setDrifting(boolean d) { this.drifting = d; }
+    public void setBraking(boolean b) { this.braking = b; }
+    public void setOffRoad(boolean o) { this.offRoad = o; }
+    public void setScraping(boolean s) { this.scraping = s; }
+    public void setBrakeTapTimer(double t) { this.brakeTapTimer = t; }
+    public void setCrashTimer(double t) { this.crashTimer = t; }
+    public void setThrottle(double t) { this.throttle = t; }
 
     public void crash(double seconds) {
         crashTimer = Math.max(crashTimer, seconds);

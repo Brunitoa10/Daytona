@@ -13,9 +13,9 @@ public final class JoystickSnapshot {
     public static final int HAT_DOWN = 34;
     public static final int HAT_LEFT = 35;
 
-    final float[] axes = new float[MAX_AXES];
-    final boolean[] buttons = new boolean[MAX_BUTTONS];
-    boolean connected;
+    private final float[] axes = new float[MAX_AXES];
+    private final boolean[] buttons = new boolean[MAX_BUTTONS];
+    private boolean connected;
 
     public float axis(int i) {
         return i >= 0 && i < MAX_AXES ? axes[i] : 0f;
@@ -51,7 +51,7 @@ public final class JoystickSnapshot {
     }
 
     /** Convierte un POV (grados, negativo = centrado) en 4 botones virtuales. */
-    void setHat(double degrees) {
+    public void setHat(double degrees) {
         boolean c = degrees < 0;
         buttons[HAT_UP] = !c && (degrees >= 292.5 || degrees <= 67.5);
         buttons[HAT_RIGHT] = !c && degrees >= 22.5 && degrees <= 157.5;
@@ -62,6 +62,10 @@ public final class JoystickSnapshot {
     /** Para pruebas y backends en otros paquetes. */
     public void set(int axis, float value) {
         axes[axis] = value;
+    }
+
+    public void setConnected(boolean c) {
+        this.connected = c;
     }
 
     public void press(int button, boolean down) {

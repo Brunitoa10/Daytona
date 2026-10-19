@@ -7,7 +7,7 @@ public enum ShifterType {
 
     private final String label;
 
-    ShifterType(String label) {
+    private ShifterType(String label) {
         this.label = label;
     }
 

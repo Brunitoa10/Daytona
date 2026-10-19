@@ -92,7 +92,7 @@ public final class TrackSelectScreen extends MenuScreen {
                 UiKit.Align.LEFT);
         UiKit.shadowText(g, info.name().toUpperCase(), px + 20 * s, y, UiKit.display((float) (26 * s)), UiKit.ACCENT,
                 UiKit.Align.LEFT);
-        MainMenuScreen.wrap(g, info.description(), px + 20 * s, y + 24 * s, pw - 40 * s, s);
+        UiKit.wrapText(g, info.description(), px + 20 * s, y + 24 * s, pw - 40 * s, s);
         double km = track.length() * com.daytona.domain.track.TrackConstants.METERS_PER_UNIT / 1000.0;
         UiKit.text(g, String.format("Largo: %.2f km   ·   Vueltas: %d", km, laps()), px + 20 * s, y + 74 * s,
                 UiKit.bodyBold((float) (13 * s)), UiKit.TEXT, UiKit.Align.LEFT);

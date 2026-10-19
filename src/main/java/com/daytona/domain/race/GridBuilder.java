@@ -26,7 +26,7 @@ public final class GridBuilder {
         private final List<Racer> racers;
         private final Racer player;
 
-        Grid(List<Racer> racers, Racer player) {
+        private Grid(List<Racer> racers, Racer player) {
             this.racers = Collections.unmodifiableList(racers);
             this.player = player;
         }

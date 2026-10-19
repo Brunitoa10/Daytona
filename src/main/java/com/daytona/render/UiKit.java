@@ -119,7 +119,7 @@ public final class UiKit {
         private final java.awt.Shape outline;
         private final int width;
 
-        Glyphs(java.awt.Shape shape, java.awt.Shape outline, int width) {
+        private Glyphs(java.awt.Shape shape, java.awt.Shape outline, int width) {
             this.shape = shape;
             this.outline = outline;
             this.width = width;
@@ -293,5 +293,23 @@ public final class UiKit {
 
     public static String ordinal(int n) {
         return n + "º";
+    }
+
+    /** Escribe un texto partiéndolo en renglones de ancho máximo {@code maxW}. */
+    public static void wrapText(Graphics2D g, String text, double x, double y, double maxW, double s) {
+        g.setFont(body((float) (15 * s)));
+        StringBuilder line = new StringBuilder();
+        double ly = y;
+        for (String word : text.split(" ")) {
+            String test = line.length() == 0 ? word : line + " " + word;
+            if (g.getFontMetrics().stringWidth(test) > maxW && line.length() > 0) {
+                text(g, line.toString(), x, ly, body((float) (15 * s)), TEXT, Align.LEFT);
+                ly += 22 * s;
+                line = new StringBuilder(word);
+            } else {
+                line = new StringBuilder(test);
+            }
+        }
+        text(g, line.toString(), x, ly, body((float) (15 * s)), TEXT, Align.LEFT);
     }
 }
