@@ -26,6 +26,8 @@ xcopy /e /i /y /q dist portable\Daytona >nul
 xcopy /e /i /y /q "%JROOT%" portable\Daytona\jre >nul
 copy /y Jugar.bat portable\Daytona\ >nul
 copy /y README.md portable\Daytona\ >nul
+copy /y LICENSE portable\Daytona\ >nul
+copy /y THIRD-PARTY-NOTICES.txt portable\Daytona\ >nul
 echo.
 echo Version portable lista en: portable\Daytona  ^(abrir Jugar.bat^)
 pause

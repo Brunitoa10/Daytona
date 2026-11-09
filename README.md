@@ -137,3 +137,13 @@ repositorios SQLite, pedales invertidos, asistente de asignación y fantasma.
 ## Ideas para seguir
 Force feedback en volantes (DirectInput), música chiptune sintetizada, clima (lluvia), pantalla dividida
 para 2 jugadores, editor de pistas que guarde en la base, y ranking online opcional cuando haya red.
+
+## Licencia
+El código de Daytona se distribuye bajo la **licencia MIT** (ver [`LICENSE`](LICENSE)).
+© 2026 Bruno Ariel Parisi.
+
+Las bibliotecas de `lib/` (SQLite JDBC, PostgreSQL JDBC y SLF4J) conservan sus propias licencias:
+el detalle está en [`THIRD-PARTY-NOTICES.txt`](THIRD-PARTY-NOTICES.txt).
+
+"Daytona" y "Daytona USA" son marcas de SEGA. Este proyecto es un homenaje sin fines comerciales,
+no está afiliado a SEGA y la licencia no otorga derechos sobre esas marcas.

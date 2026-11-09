@@ -1,0 +1,21 @@
+Daytona incluye las siguientes bibliotecas de terceros (carpeta lib/).
+Cada una conserva su propia licencia, independiente de la licencia MIT de este proyecto.
+
+1) SQLite JDBC Driver (org.xerial:sqlite-jdbc 3.46.1.0)
+   Licencia: Apache License 2.0 - https://www.apache.org/licenses/LICENSE-2.0
+   Incluye el motor SQLite, que es de dominio publico.
+   El texto completo de la licencia viene dentro de lib/sqlite-jdbc.jar
+   (META-INF/maven/org.xerial/sqlite-jdbc/LICENSE).
+
+2) PostgreSQL JDBC Driver (org.postgresql:postgresql 42.7.4)
+   Licencia: BSD 2-Clause - https://jdbc.postgresql.org/license/
+   Copyright (c) 1997, PostgreSQL Global Development Group.
+
+3) SLF4J API y SLF4J NOP (org.slf4j 1.7.32)
+   Licencia: MIT - https://www.slf4j.org/license.html
+   Copyright (c) 2004-2017 QOS.ch.
+
+Aviso de marcas: "Daytona" y "Daytona USA" son marcas de sus respectivos
+titulares (SEGA). Este proyecto es un homenaje sin fines comerciales y no esta
+afiliado ni respaldado por ellos. La licencia MIT cubre solo el codigo fuente
+y no otorga derechos sobre esas marcas.

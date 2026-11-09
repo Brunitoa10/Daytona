@@ -10,6 +10,20 @@
     <packaging>jar</packaging>
     <name>Daytona - Arcade Racer</name>
 
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Bruno Ariel Parisi</name>
+        </developer>
+    </developers>
+
     <!--
       Compatible con Java 8+ y Windows 7 en adelante (x86 y x64).
       Joysticks, volantes, pedales y palancas se leen con una DLL JNI propia
